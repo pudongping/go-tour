@@ -44,14 +44,18 @@ var calculateTimeCmd = &cobra.Command{
 			currentTimer = timer.GetNowTime()
 		} else {
 			var err error
-			space := strings.Count(calculateTime, ":")
+			space := strings.Count(calculateTime, " ")
 			if space == 0 {
 				layout = "2006-01-02"
 			}
 			if space == 1 {
-				layout = "2006-01-02 15:04"
+				layout = "2006-01-02 15:04:05"
 			}
-			currentTimer, err = time.Parse(layout, calculateTime)
+			calculateTime = strings.Trim(calculateTime, " ")
+			location, _ := time.LoadLocation("Asia/Shanghai")
+			// Parse 方法会尝试在入参的参数中中分析并读取时区信息，但是如果入参的参数没有指定时区信息的话，那么就会默认使用 UTC 时间
+			// 因此我们最好使用 ParseInLocation 方法并指定时区
+			currentTimer, err = time.ParseInLocation(layout, calculateTime, location)
 			if err != nil {
 				t, _ := strconv.Atoi(calculateTime)
 				currentTimer = time.Unix(int64(t), 0)
