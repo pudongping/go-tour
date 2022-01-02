@@ -195,5 +195,39 @@ func (model Users) TableName() string {
         return "users"
 }
 
+```
+
+## json 字符串转 struct 结构体
+
+1. 查看帮助信息
+
+```shell
+
+go run main.go json struct -h 
+
+json转换
+
+Usage:
+   json struct [flags]
+
+Flags:
+  -h, --help         help for struct
+  -s, --str string   请输入json字符串
+
+```
+
+2. json 字符串转结构体
+
+```shell
+
+go run main.go json struct -s='{"code":200,"msg":"Success","data":{"name":"alex","age":26,"favorite":["basketball","pingpong-ball"],"lucky-number":[6, 8]}}'
+
+2022/01/03 04:20:09 输出结果: 
+
+type Tour struct {
+    Code float64
+    Msg string
+    Data map[string]interface {}
+}
 
 ```
