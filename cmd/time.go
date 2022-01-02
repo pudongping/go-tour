@@ -45,10 +45,12 @@ var calculateTimeCmd = &cobra.Command{
 		} else {
 			var err error
 			space := strings.Count(calculateTime, " ")
+			space1 := strings.Count(calculateTime, "-")
+			space2 := strings.Count(calculateTime, ":")
 			if space == 0 {
 				layout = "2006-01-02"
 			}
-			if space == 1 {
+			if space == 1 || (space1 == 0 && space2 == 0) {
 				layout = "2006-01-02 15:04:05"
 			}
 			calculateTime = strings.Trim(calculateTime, " ")
