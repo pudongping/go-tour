@@ -2,7 +2,32 @@
 
 go 命令行应用
 
-## 单词格式化转换
+## 安装
+
+```shell
+# Go version >= 1.16
+$  go install github.com/pudongping/go-tour@latest
+
+# Go version < 1.16
+$ go get -u github.com/pudongping/go-tour
+```
+
+## 使用
+
+> 更多命令，请查看 `源码运行` 示例
+
+```shell
+# 查看帮助信息
+go-tour -h
+
+# 示例：
+# 比如，打印 sql 结构体。
+go-tour sql struct --username root --password 123456 --db goblog --table users
+```
+
+## 源码运行
+
+### 单词格式化转换
 
 1. 查看帮助信息
 
@@ -66,7 +91,7 @@ go run main.go word -s=AlexPu -m=5
 # 2022/01/02 19:10:49 输出结果：alex_pu
 ```
 
-## 时间处理工具
+### 时间处理工具
 
 1. 查看帮助信息
 
@@ -146,7 +171,7 @@ go run main.go time calc -c="1640966400" -d=0h
 # 2022/01/02 19:53:52 输出结果: 2022-01-01 00:00:00, 1640966400
 ```
 
-## sql 语句到结构体的转换
+### sql 语句到结构体的转换
 
 1. 查看帮助信息
 
@@ -197,7 +222,7 @@ func (model Users) TableName() string {
 
 ```
 
-## json 字符串转 struct 结构体
+### json 字符串转 struct 结构体
 
 1. 查看帮助信息
 
