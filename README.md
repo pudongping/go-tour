@@ -6,7 +6,7 @@ go 命令行应用
 
 ```shell
 # Go version >= 1.16
-$  go install github.com/pudongping/go-tour@latest
+$ go install github.com/pudongping/go-tour@latest
 
 # Go version < 1.16
 $ go get -u github.com/pudongping/go-tour
@@ -22,7 +22,7 @@ go-tour -h
 
 # 示例：
 # 比如，打印 sql 结构体。
-go-tour sql struct --username root --password 123456 --db goblog --table users
+go-tour sql struct --host 127.0.0.1:3306 --username root --password 123456 --db goblog --table users
 ```
 
 ## 源码运行
@@ -199,7 +199,7 @@ Flags:
 
 ```shell
 
-go run main.go sql struct --username root --password 123456 --db goblog --table users
+go run main.go sql struct --host 127.0.0.1:3306 --username root --password 123456 --db goblog --table users
 
 type Users struct {
          // id  bigint(20) unsigned is_nullable NO
@@ -208,11 +208,11 @@ type Users struct {
          CreatedAt      time.Time       `json:"created_at"`
          // updated_at  datetime(3) is_nullable YES
          UpdatedAt      time.Time       `json:"updated_at"`
-         // name  varchar(255) is_nullable NO
+         // 用户名  varchar(255) is_nullable NO
          Name   string  `json:"name"`
-         // email  varchar(255) is_nullable YES
+         // 邮箱  varchar(255) is_nullable YES
          Email  string  `json:"email"`
-         // password  varchar(255) is_nullable YES
+         // 密码  varchar(255) is_nullable YES
          Password       string  `json:"password"`
 }
 
