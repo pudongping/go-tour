@@ -202,18 +202,30 @@ Flags:
 go run main.go sql struct --host 127.0.0.1:3306 --username root --password 123456 --db goblog --table users
 
 type Users struct {
-         // id  bigint(20) unsigned is_nullable NO
-         Id     int64   `json:"id"`
-         // created_at  datetime(3) is_nullable YES
-         CreatedAt      time.Time       `json:"created_at"`
-         // updated_at  datetime(3) is_nullable YES
-         UpdatedAt      time.Time       `json:"updated_at"`
-         // 用户名  varchar(255) is_nullable NO
-         Name   string  `json:"name"`
-         // 邮箱  varchar(255) is_nullable YES
-         Email  string  `json:"email"`
-         // 密码  varchar(255) is_nullable YES
-         Password       string  `json:"password"`
+    // id  auto_increment PRI bigint(20) unsigned is_nullable: NO
+	Id int `gorm:"column:id;primaryKey;autoIncrement;" json:"id"`
+	// 用户名    varchar(255) is_nullable: YES
+	Name string `gorm:"column:name;" json:"name"`
+	// 邮箱   UNI varchar(80) is_nullable: YES
+	Email string `gorm:"column:email;unique;" json:"email"`
+	// 手机号码   UNI varchar(40) is_nullable: YES
+	Phone string `gorm:"column:phone;unique;" json:"phone"`
+	// 自定义头像    varchar(255) is_nullable: NO
+	Avatar string `gorm:"column:avatar;" json:"avatar"`
+	// 账号   UNI varchar(40) is_nullable: YES
+	Account string `gorm:"column:account;unique;" json:"account"`
+	// 密码    varchar(255) is_nullable: NO
+	Password string `gorm:"column:password;" json:"password"`
+	// 状态，1=启用，2=禁用    tinyint(4) is_nullable: NO  default_value: 1
+	Status int8 `gorm:"column:status;" json:"status"`
+	// 简介    varchar(255) is_nullable: NO
+	Introduction string `gorm:"column:introduction;" json:"introduction"`
+	// 创建时间    int(11) unsigned is_nullable: NO  default_value: 0
+	CreatedAt int `gorm:"column:created_at;" json:"created_at"`
+	// 更新时间    int(11) unsigned is_nullable: NO  default_value: 0
+	UpdatedAt int `gorm:"column:updated_at;" json:"updated_at"`
+	// 软删除时间    int(11) unsigned is_nullable: NO  default_value: 0
+	DeletedAt int `gorm:"column:deleted_at;" json:"deleted_at"`
 }
 
 func (model Users) TableName() string {

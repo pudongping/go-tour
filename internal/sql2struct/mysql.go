@@ -34,11 +34,11 @@ type TableColumn struct {
 
 // 表字段类型映射
 var DBTypeToStructType = map[string]string{
-	"int":        "uint",
+	"int":        "int",
 	"tinyint":    "int8",
 	"smallint":   "int",
 	"mediumint":  "int64",
-	"bigint":     "uint",
+	"bigint":     "int",
 	"bit":        "int",
 	"bool":       "bool",
 	"enum":       "string",

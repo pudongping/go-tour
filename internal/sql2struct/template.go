@@ -1,7 +1,6 @@
 package sql2struct
 
 import (
-	"fmt"
 	"os"
 	"text/template"
 
@@ -46,7 +45,25 @@ func NewStructTemplate() *StructTemplate {
 func (t *StructTemplate) AssemblyColumns(tbColumns []*TableColumn) []*StructColumn {
 	tplColumns := make([]*StructColumn, 0, len(tbColumns))
 	for _, column := range tbColumns {
-		tag := fmt.Sprintf("`"+"json:"+"\"%s\""+"`", column.ColumnName) // 标签
+		jsonTag := `json:"` + column.ColumnName + `"`
+		gormTag := `gorm:"column:` + column.ColumnName + ";"
+
+		if "PRI" == column.ColumnKey {
+			gormTag += "primaryKey;"
+		}
+
+		if "UNI" == column.ColumnKey {
+			gormTag += "unique;"
+		}
+
+		if "auto_increment" == column.Extra {
+			gormTag += "autoIncrement;"
+		}
+
+		gormTag += `" `
+
+		tag := "`" + gormTag + jsonTag + "`"
+
 		tplColumns = append(tplColumns, &StructColumn{
 			Name:         column.ColumnName,
 			Type:         DBTypeToStructType[column.DataType],
