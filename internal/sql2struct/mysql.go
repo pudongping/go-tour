@@ -59,7 +59,8 @@ var DBTypeToStructType = map[string]string{
 	"time":       "time.Time",
 	"float":      "float64",
 	"double":     "float64",
-	"decimal":    "string", // 考虑到整数溢出以及浮点数精度丢失风险，建议将 `decimal` 类型以 `string` 类型接收
+	// 考虑到整数溢出以及浮点数精度丢失风险，建议将 `decimal` 类型以 `string` 类型接收。（当然也可以使用 float64 接收，操作比较方便）
+	"decimal": "float64",
 }
 
 func NewDBModel(info *DBInfo) *DBModel {
